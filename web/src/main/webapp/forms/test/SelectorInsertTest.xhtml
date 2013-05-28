@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2012. betterFORM Project - http://www.betterform.de
+  ~ Licensed under the terms of BSD License
+  -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xf="http://www.w3.org/2002/xforms"
+        >
+<head>
+    <meta name="author" content="lars.windauer at betterform.de"/>
+    <meta name="description" content="test form for inserting items into selector elements"/>
+    <meta name="version" content="$Id: SelectorInsertTest.xhtml 2013-05-28 114:19:09Z lw $"/>
+
+    <xf:model id="model-1">
+        <xf:instance id="instance-1" xmlns="">
+            <data>
+                <result>1</result>
+            </data>
+        </xf:instance>
+        <xf:bind id="bind-result-1" nodeset="result[1]"/>
+
+        <xf:instance id="i-itemset" xmlns="">
+            <data>
+                <list>
+                    <entry value="1">First</entry>
+                    <entry value="2">Second</entry>
+                    <entry value="3">Third</entry>
+                </list>
+            </data>
+        </xf:instance>
+        <xf:bind id="bind-entry" nodeset="instance('i-itemset')/list/entry">
+            <xf:bind id="bind-label" nodeset="."/>
+            <xf:bind id="bind-value" nodeset="@value" type="integer"/>
+        </xf:bind>
+
+        <xf:instance id="i-origin" xmlns="">
+            <data>
+                <entry value="4">Fourth</entry>
+            </data>
+        </xf:instance>
+    </xf:model>
+</head>
+<body>
+<xf:group>
+    <xf:select1 id="select1-1" bind="bind-result-1">
+        <xf:label>Select1 with dynamic Itemset</xf:label>
+        <xf:itemset bind="bind-entry">
+            <xf:label bind="bind-label"/>
+            <xf:value bind="bind-value"/>
+        </xf:itemset>
+    </xf:select1>
+    <xf:trigger id="insert-item-at-pos-1">
+        <xf:label>Insert Item</xf:label>
+        <xf:insert nodeset="instance('i-itemset')/list/entry"
+                   at="1"
+                   position="before"
+                   origin="instance('i-origin')/entry[1]"/>
+
+    </xf:trigger>
+</xf:group>
+</body>
+</html>
