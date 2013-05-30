@@ -11,6 +11,8 @@ import de.betterform.xml.xforms.exception.XFormsException;
 import de.betterform.xml.xpath.impl.saxon.XPathUtil;
 import junit.framework.TestCase;
 import net.sf.saxon.om.NodeInfo;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.List;
 
@@ -25,14 +27,11 @@ public class SelectorInsertTest extends TestCase {
 //        org.apache.log4j.BasicConfigurator.configure();
 //    }
 
-    private XFormsProcessorImpl xformsProcesssorImpl;
 
-    /**
-     * Tests Select1 with dynamic Itemset.
-     *
-     * @throws Exception if any error occurred during the test.
-     */
-    public void testSelect1Dynamic() throws Exception {
+    private XFormsProcessorImpl xformsProcesssorImpl;
+    private static final Log LOGGER = LogFactory.getLog(SelectorInsertTest.class);
+
+    public void test_id_calculation_for_insert_item_into_nodeset_at_position_first() throws Exception {
         Selector selector = (Selector) this.xformsProcesssorImpl.getContainer().lookup("select1-1");
         assertEquals("1", selector.getValue());
 
@@ -40,29 +39,35 @@ public class SelectorInsertTest extends TestCase {
         verifyItem(selector, 3, 1, "C10", "2", "Second");
         verifyItem(selector, 3, 2, "C15", "3", "Third");
 
-
-
-        // register(item1, item2, item3);
-        this.xformsProcesssorImpl.dispatch("insert-item-at-pos-1", DOMEventNames.ACTIVATE);
+        this.xformsProcesssorImpl.dispatch("insert-item-at-first", DOMEventNames.ACTIVATE);
         DOMUtil.prettyPrintDOM(this.xformsProcesssorImpl.getContainer().getDocument());
 
-        /**
-        verifyItem(selector, 4, 0, "C5", "4", "Fourth");
-        verifyItem(selector, 4, 1, "C10",  "1", "First");
-        verifyItem(selector, 4, 2, "C15", "2", "Second");
-        verifyItem(selector, 4, 3, "C22", "3", "Third");
-        **/
-
-        verifyItem(selector, 4, 0, "C22", "4", "Fourth");
-        verifyItem(selector, 4, 1, "C5",  "1", "First");
-        verifyItem(selector, 4, 2, "C10", "2", "Second");
-        verifyItem(selector, 4, 3, "C15", "3", "Third");
-
-
-
-        // deregister(item1, item2, item3);
-
+        verifyItem(selector, 5, 0, "C29",  "1", "First");
+        verifyItem(selector, 5, 1, "C5",  "1", "First");
+        verifyItem(selector, 5, 2, "C10", "2", "Second");
+        verifyItem(selector, 5, 3, "C15", "3", "Third");
+        verifyItem(selector, 5, 4, "C24", "4", "Fourth");
     }
+
+
+    public void test_id_calculation_for_insert_item_into_nodeset_at_position_last() throws Exception {
+        Selector selector = (Selector) this.xformsProcesssorImpl.getContainer().lookup("select1-1");
+        assertEquals("1", selector.getValue());
+
+        verifyItem(selector, 3, 0, "C5",  "1", "First");
+        verifyItem(selector, 3, 1, "C10", "2", "Second");
+        verifyItem(selector, 3, 2, "C15", "3", "Third");
+
+        this.xformsProcesssorImpl.dispatch("insert-item-at-last", DOMEventNames.ACTIVATE);
+
+        // DOMUtil.prettyPrintDOM(this.xformsProcesssorImpl.getContainer().getDocument());
+
+        verifyItem(selector, 4, 0, "C5",  "1", "First");
+        verifyItem(selector, 4, 1, "C10", "2", "Second");
+        verifyItem(selector, 4, 2, "C15", "3", "Third");
+        verifyItem(selector, 4, 3, "C24", "4", "Fourth");
+    }
+
 
     private void verifyItem(Selector selector, int size, int itemPosition, String itemId, String itemValue, String itemLabel) throws XFormsException {
         List resultIds= XPathUtil.evaluate(selector.getElement(), "xf:itemset/xf:item/@id");

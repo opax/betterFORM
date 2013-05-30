@@ -50,11 +50,19 @@
             <xf:value bind="bind-value"/>
         </xf:itemset>
     </xf:select1>
-    <xf:trigger id="insert-item-at-pos-1">
-        <xf:label>Insert Item</xf:label>
+    <xf:trigger id="insert-item-at-first">
+        <xf:label>Insert Item [position = first]</xf:label>
         <xf:insert nodeset="instance('i-itemset')/list/entry"
                    at="1"
                    position="before"
+                   origin="instance('i-origin')/entry[1]"/>
+
+    </xf:trigger>
+    <xf:trigger id="insert-item-at-last">
+        <xf:label>Insert Item [position = last]</xf:label>
+        <xf:insert nodeset="instance('i-itemset')/list/entry"
+                   at="last()"
+                   position="after"
                    origin="instance('i-origin')/entry[1]"/>
 
     </xf:trigger>
