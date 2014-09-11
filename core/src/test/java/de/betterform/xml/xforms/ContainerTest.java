@@ -93,8 +93,8 @@ public class ContainerTest extends TestCase {
         this.processor.setXForms(getClass().getResourceAsStream("buglet7.xml"));
         this.processor.setBaseURI("file://" + path);
 
-        this.versionEventListener = new TestEventListener();
-        ((EventTarget)this.processor.getXForms().getDocumentElement()).addEventListener(XFormsEventNames.VERSION_EXCEPTION, this.versionEventListener, true);
+            this.versionEventListener = new TestEventListener();
+            ((EventTarget)this.processor.getXForms().getDocumentElement()).addEventListener(XFormsEventNames.VERSION_EXCEPTION, this.versionEventListener, true);
 
         assertNull(this.versionEventListener.getType());
 
@@ -120,8 +120,8 @@ public class ContainerTest extends TestCase {
         this.processor.setXForms(getClass().getResourceAsStream("buglet8.xml"));
         this.processor.setBaseURI("file://" + path);
 
-        this.versionEventListener = new TestEventListener();
-        ((EventTarget)this.processor.getXForms().getDocumentElement()).addEventListener(XFormsEventNames.VERSION_EXCEPTION, this.versionEventListener, true);
+            this.versionEventListener = new TestEventListener();
+            ((EventTarget)this.processor.getXForms().getDocumentElement()).addEventListener(XFormsEventNames.VERSION_EXCEPTION, this.versionEventListener, true);
 
         assertNull(this.versionEventListener.getType());
 
