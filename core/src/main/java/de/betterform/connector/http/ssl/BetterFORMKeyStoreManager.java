@@ -55,12 +55,14 @@ public class BetterFORMKeyStoreManager implements X509KeyManager {
                 throw new IllegalArgumentException("BetterFORMKeyStoreManager: Keystore url may not be null");
             }
 
+            final char[] passwordChars = password != null ? password.toCharArray() : null;
+
             LOGGER.debug("BetterFORMKeyStoreManager: initializing custom key store");
             KeyStore customKeystore  = KeyStore.getInstance(KeyStore.getDefaultType());
             InputStream is = null;
             try {
         	    is = url.openStream();
-                customKeystore.load(is, password != null ? password.toCharArray(): null);
+                customKeystore.load(is, passwordChars);
             } finally {
         	    if (is != null) is.close();
             }
@@ -81,7 +83,7 @@ public class BetterFORMKeyStoreManager implements X509KeyManager {
                 }
             }
         }
-            keyManagerFactory.init(customKeystore, password.toCharArray());
+            keyManagerFactory.init(customKeystore, passwordChars);
 
             KeyManager[] customX509KeyManagers = keyManagerFactory.getKeyManagers();
             if (customX509KeyManagers != null && customX509KeyManagers.length > 0) {

@@ -132,7 +132,7 @@ public class SaxonXPathExpressionSerializer {
                 	result.append(":");
             	}
             }
-            if(name.getPrefix().equals("saxon") && name.getLocalPart().equals("item-at")) {
+            if("saxon".equals(name.getPrefix()) && "item-at".equals(name.getLocalPart())) {
         		result.append("subsequence");
         	} else {
         		result.append(name.getLocalPart());

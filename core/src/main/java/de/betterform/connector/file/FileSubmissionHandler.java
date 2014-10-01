@@ -53,7 +53,7 @@ public class FileSubmissionHandler extends AbstractConnector implements Submissi
      * @throws XFormsException if any error occurred during submission.
      */
     public Map submit(Submission submission, Node instance) throws XFormsException {
-        if (submission.getMethod().equalsIgnoreCase("get")) {
+        if ("get".equalsIgnoreCase(submission.getMethod())) {
             try {
                 // create uri
                 URI uri = new URI(getURI());
@@ -90,8 +90,8 @@ public class FileSubmissionHandler extends AbstractConnector implements Submissi
             }
         }
 
-        if (submission.getMethod().equalsIgnoreCase("put")) {
-            if (!submission.getReplace().equals("none")) {
+        if ("put".equalsIgnoreCase(submission.getMethod())) {
+            if (!"none".equals(submission.getReplace())) {
                 throw new XFormsException("submission mode '" + submission.getReplace() + "' not supported");
             }
 
@@ -118,7 +118,7 @@ public class FileSubmissionHandler extends AbstractConnector implements Submissi
             return new HashMap();
         }
         
-        if(submission.getMethod().equalsIgnoreCase("delete")) {
+        if("delete".equalsIgnoreCase(submission.getMethod())) {
         	try {
         		// create uri
                 URI uri = new URI(getURI());

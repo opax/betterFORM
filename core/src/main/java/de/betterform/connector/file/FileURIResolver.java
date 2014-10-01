@@ -104,6 +104,8 @@ public class FileURIResolver extends AbstractConnector implements URIResolver {
         root.setAttribute("parentDir", directory.getParentFile().toURI().toString());
 
         File[] fileList = directory.listFiles();
+        if (fileList == null) fileList = new File[0];
+
         File file;
         Element element;
         for (int i = 0; i < fileList.length; i++) {

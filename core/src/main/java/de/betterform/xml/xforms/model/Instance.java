@@ -171,7 +171,7 @@ public class Instance extends XFormsElement {
 
         for (int i = 0; i < nodeset.size(); ++i) {
             Node node =  de.betterform.xml.xpath.impl.saxon.XPathUtil.getAsNode(nodeset, i + 1);
-            listModelItems(list, node, deep);
+            if (node != null /* text nodes are returned as `null` */) listModelItems(list, node, deep); else { LOGGER.warn("unexpected node type in " + nodeset + " at position " + i); }
         }
 
         return list.iterator();

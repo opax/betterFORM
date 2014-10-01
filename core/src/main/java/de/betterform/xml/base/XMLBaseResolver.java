@@ -51,7 +51,7 @@ public class XMLBaseResolver {
             throws URISyntaxException {
 
         if(relURI==null){
-            throw new URISyntaxException(relURI , "is not a valid URI") ;
+            throw new URISyntaxException("[null]" , "is not a valid URI") ;
         }
         URI uri = new URI(relURI);
 

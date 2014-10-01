@@ -137,7 +137,7 @@ public abstract class AbstractUIElement extends XFormsElement {
 
         }
         Node parent = node.getParentNode();
-        if (parent.getNodeType() == Node.DOCUMENT_NODE || parent.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE || parent == null) {
+        if (parent == null || parent.getNodeType() == Node.DOCUMENT_NODE || parent.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE) {
             return "/" + targetRef;
         }else if(parent.getNodeType() == Node.ELEMENT_NODE){
             return getTargetReference((Element) parent,targetRef);

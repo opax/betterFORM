@@ -493,7 +493,7 @@ public class Container {
             XFormsErrorIndication indication = (XFormsErrorIndication) exception;
 
             LOGGER.warn("XForms Error: " + indication.getMessage());
-            if (!indication.isHandled()) {
+            if (!indication.isHandled() && indication.getEventTarget() != null) {
                 // dispatch error indication event
                 try {
                     dispatch(indication.getEventTarget(),

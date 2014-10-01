@@ -72,8 +72,9 @@ public class Property extends XFormsFunction {
             } catch (XFormsException e) {
                 throw new XPathException(new XFormsComputeException("Requesting invalid property '" + name + "'", xformsElement.getTarget(), this));
             }
-        }else {
-            throw new XPathException(new XFormsComputeException("Requesting invalid property '" + name + "'", xformsElement.getTarget(), this));
+        } else {
+            // xformsElement == null
+            throw new XPathException(new XFormsComputeException("Requesting invalid property '" + name + "'", null, this));
         }
         return new StringValue("");
 	}
