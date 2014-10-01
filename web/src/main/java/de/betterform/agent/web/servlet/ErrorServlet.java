@@ -90,7 +90,7 @@ public class ErrorServlet extends HttpServlet {
                 byte bytes[] = serializedDoc.getBytes("UTF-8");
                 Document newDoc = PositionalXMLReader.readXML(new ByteArrayInputStream(bytes));
                 DOMUtil.prettyPrintDOM(newDoc);
-                //eval xpath
+                //eval xpath - TODO this may fail because of missing namespace declarations. No suitable error information is logged in this case.
                 Node n = XPathUtil.evaluateAsSingleNode(newDoc,xpath);
                 String linenumber = (String) n.getUserData("lineNumber");
                 DOMUtil.appendElement(rootNode, "lineNumber", linenumber);

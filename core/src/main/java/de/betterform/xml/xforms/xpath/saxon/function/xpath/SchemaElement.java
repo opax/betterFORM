@@ -245,7 +245,9 @@ public class SchemaElement extends XFormsFunction {
 
         for (Object object : xsModelGroupDefinition.getModelGroup().getParticles()) {
             XSObject xsObject = (XSObject) object;
-            System.out.println(xsObject.getNamespace() + "," + xsObject.getName());
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug(xsObject.getNamespace() + "," + xsObject.getName());
+            }
         }
         return document;
     }

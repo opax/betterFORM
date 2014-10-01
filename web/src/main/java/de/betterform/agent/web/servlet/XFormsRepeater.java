@@ -130,7 +130,8 @@ public class XFormsRepeater extends HttpServlet {
         }
 
         request.setAttribute(WebFactory.USER_AGENT, useragent);
-        System.out.println("request: " + request.getRequestURL().toString());
+        if (LOGGER.isDebugEnabled())
+            LOGGER.debug("request: " + request.getRequestURL().toString());
 
         if ("GET".equalsIgnoreCase(request.getMethod()) && request.getParameter(BetterFORMConstants.SUBMISSION_RESPONSE) != null) {
             doSubmissionReplaceAll(request, response);
@@ -220,9 +221,9 @@ public class XFormsRepeater extends HttpServlet {
         ServletContext context = this.getServletContext();
 
         if (request.getAttribute("XFormsInputStream") != null) {
-            System.out.println("Request has an extra Stream!: ");
-            System.out.println("Context: " + context.getServletContextName());
-            System.out.println("Original Request URL: " + request.getAttribute("betterform.base.url"));
+            LOGGER.warn("Request has an extra Stream!: ");
+            LOGGER.warn("Context: " + context.getServletContextName());
+            LOGGER.warn("Original Request URL: " + request.getAttribute("betterform.base.url"));
             url = (String) request.getAttribute(WebProcessor.FORWARD_URL);
         }
 //        XFormsSession xFormsSession = null;
