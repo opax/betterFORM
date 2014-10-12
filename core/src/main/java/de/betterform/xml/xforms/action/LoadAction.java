@@ -233,9 +233,7 @@ public class LoadAction extends AbstractBoundAction {
         }
 
         embed = extractFragment(absoluteURI, embed);
-        if(LOGGER.isDebugEnabled()){
-            DOMUtil.prettyPrintDOM(embed);
-        }
+        DOMUtil.debugDOM(LOGGER, embed);
 
         Element embeddedNode;
         Element targetElem = getTargetElement(evaluatedTarget);

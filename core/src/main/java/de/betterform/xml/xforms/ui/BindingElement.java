@@ -105,8 +105,8 @@ public abstract class BindingElement extends AbstractUIElement implements Bindin
                 this.attributeValueMap.put(attribute,expression );
 
                 if(LOGGER.isTraceEnabled()){
-                    LOGGER.debug("evaluating AVT at: " + DOMUtil.getCanonicalPath(this.getElement()) + "/@" + attribute);
-                    DOMUtil.prettyPrintDOM(this.element);
+                    LOGGER.trace("evaluating AVT at: " + DOMUtil.getCanonicalPath(this.getElement()) + "/@" + attribute);
+                    DOMUtil.traceDOM(LOGGER, this.element);
                 }
 
                 Object result=this.evalAttributeValueTemplates(expression,this.getElement());
@@ -523,15 +523,15 @@ public abstract class BindingElement extends AbstractUIElement implements Bindin
      */
     protected final void updateElementState() throws XFormsException {
         if(LOGGER.isTraceEnabled()){
-            LOGGER.debug(">>> before update <<<");
-            DOMUtil.prettyPrintDOM(this.element);
+            LOGGER.trace(">>> before update <<<");
+            DOMUtil.traceDOM(LOGGER, this.element);
         }
         if (this.elementState != null) {
             this.elementState.update();
         }
         if(LOGGER.isTraceEnabled()){
-            LOGGER.debug(">>> after update <<<");
-            DOMUtil.prettyPrintDOM(this.element);
+            LOGGER.trace(">>> after update <<<");
+            DOMUtil.traceDOM(LOGGER, this.element);
         }
     }
 

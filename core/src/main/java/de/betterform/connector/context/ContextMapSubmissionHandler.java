@@ -58,7 +58,7 @@ public class ContextMapSubmissionHandler extends AbstractConnector implements Su
 
         if (LOGGER.isTraceEnabled()) {
             LOGGER.trace("submitting instance...");
-            DOMUtil.prettyPrintDOM(instance);
+            DOMUtil.traceDOM(LOGGER, instance);
         }
 
 
@@ -67,9 +67,7 @@ public class ContextMapSubmissionHandler extends AbstractConnector implements Su
                 String contextKey = ContextMapResolver.getContextKeyFormURI(getURI());
                 Object xmlNode = ContextMapResolver.getNodeFromContext(contextKey, getContext());
 
-                if (LOGGER.isTraceEnabled()) {
-                    DOMUtil.prettyPrintDOM((Node) xmlNode);
-                }
+                DOMUtil.traceDOM(LOGGER, (Node) xmlNode);
 
                 Map response = new HashMap(1);
                 response.put(XFormsProcessor.SUBMISSION_RESPONSE_DOCUMENT, xmlNode);
@@ -91,7 +89,7 @@ public class ContextMapSubmissionHandler extends AbstractConnector implements Su
                         DOMUtil.importAndAppendNode(doc, instance);
                         if (LOGGER.isTraceEnabled()) {
                             LOGGER.trace("storing instance in context...");
-                            DOMUtil.prettyPrintDOM(doc);
+                            DOMUtil.traceDOM(LOGGER, doc);
                         }
                     } else if (instance instanceof Document) {
                         doc = DOMUtil.newDocument(true, false);
@@ -104,11 +102,7 @@ public class ContextMapSubmissionHandler extends AbstractConnector implements Su
 
                     if (LOGGER.isTraceEnabled()) {
                         LOGGER.trace("storing instance in context...\n");
-                        try {
-                            DOMUtil.prettyPrintDOM(doc, System.out);
-                        } catch (TransformerException e) {
-                            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                        }
+                        DOMUtil.traceDOM(LOGGER, doc);
                     }
 
                     getContext().put(contextKey, doc);

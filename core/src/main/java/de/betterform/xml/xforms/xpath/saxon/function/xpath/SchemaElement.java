@@ -286,7 +286,7 @@ public class SchemaElement extends XFormsFunction {
                     Document elementDocument = getContextNode(namespace, elementName, parent, xsModel);
 
                     if (LOGGER.isDebugEnabled() && elementDocument != null) {
-                        DOMUtil.prettyPrintDOM(elementDocument.getDocumentElement());
+                        DOMUtil.debugDOM(LOGGER, elementDocument.getDocumentElement());
                     }
 
                     if (elementDocument != null) {

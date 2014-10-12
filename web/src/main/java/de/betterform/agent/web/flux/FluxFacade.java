@@ -211,9 +211,7 @@ public class FluxFacade {
     public org.w3c.dom.Element getXFormsDOM(String sessionKey) throws FluxException {
         try {
             Element resultElem = ((Document) FluxUtil.getProcessor(sessionKey, request, response, session).getXForms()).getDocumentElement();
-            if (LOGGER.isDebugEnabled()) {
-                DOMUtil.prettyPrintDOM(resultElem);
-            }
+            DOMUtil.debugDOM(LOGGER, resultElem);
             return resultElem;
         } catch (XFormsException e) {
             throw new FluxException(e);

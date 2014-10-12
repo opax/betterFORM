@@ -481,9 +481,9 @@ public class Instance extends XFormsElement {
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("setInstanceDocument");
             LOGGER.debug("former instance:");
-            DOMUtil.prettyPrintDOM(this.instanceDocument);
+            DOMUtil.debugDOM(LOGGER, this.instanceDocument);
             LOGGER.debug("updated instance:");
-            DOMUtil.prettyPrintDOM(document);
+            DOMUtil.debugDOM(LOGGER, document);
         }
         this.instanceDocument = document;
 

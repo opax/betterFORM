@@ -401,7 +401,7 @@ public class WebProcessor extends AbstractProcessorDecorator {
                     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
                     if (LOGGER.isDebugEnabled()) {
                         LOGGER.debug("WebProcessor: Begin Form: \n");
-                        DOMUtil.prettyPrintDOM(this.xformsProcessor.getXForms());
+                        DOMUtil.debugDOM(LOGGER, this.xformsProcessor.getXForms());
                         LOGGER.debug("\nWebProcessor: End Form");
                     }
 

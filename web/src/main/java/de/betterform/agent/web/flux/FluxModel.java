@@ -80,7 +80,9 @@ public class FluxModel {
             element = FluxUtil.getProcessor(sessionKey, request, response, session).getXFormsModel(modelId).getInstanceDocument(instanceId).getDocumentElement();
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             DOMUtil.prettyPrintDOM(element,out);
-            LOGGER.debug("xml: " + StringEscapeUtils.escapeXml(out.toString()));
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("xml: " + StringEscapeUtils.escapeXml(out.toString()));
+            }
             return StringEscapeUtils.escapeXml(out.toString());
         } catch (XFormsException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

@@ -89,8 +89,8 @@ public class ErrorServlet extends HttpServlet {
             try {
                 byte bytes[] = serializedDoc.getBytes("UTF-8");
                 Document newDoc = PositionalXMLReader.readXML(new ByteArrayInputStream(bytes));
-                DOMUtil.prettyPrintDOM(newDoc);
-                //eval xpath - TODO this may fail because of missing namespace declarations. No suitable error information is logged in this case.
+                DOMUtil.debugDOM(LOGGER, newDoc);
+                //eval xpath
                 Node n = XPathUtil.evaluateAsSingleNode(newDoc,xpath);
                 String linenumber = (String) n.getUserData("lineNumber");
                 DOMUtil.appendElement(rootNode, "lineNumber", linenumber);
@@ -104,19 +104,10 @@ public class ErrorServlet extends HttpServlet {
             } finally {
 
                 // in all cases, log whatever information about the error is available
-
-                try {
-
-                    if (LOGGER.isErrorEnabled()) {
-                        ByteArrayOutputStream messageBuf = new ByteArrayOutputStream();
-                        DOMUtil.prettyPrintDOM(rootNode, messageBuf);
-                        LOGGER.error(messageBuf.toString());
-                    }
-
-                } catch (Exception e) {
-                    // last resort
-                    LOGGER.error(msg, e);
+                if (LOGGER.isErrorEnabled()) {
+                    LOGGER.error(DOMUtil.prettyDOMString(rootNode));
                 }
+
 
             }
 

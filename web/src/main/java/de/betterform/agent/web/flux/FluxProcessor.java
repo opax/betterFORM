@@ -214,10 +214,8 @@ public class FluxProcessor extends WebProcessor implements Externalizable {
                             String parentId = ((Element) target.getParentNode()).getAttributeNS(null, "id");
                             xmlEvent.addProperty("parentId", parentId);
                         } else if (control instanceof BindingElement) {
-                            if(LOGGER.isDebugEnabled()) {
-                                DOMUtil.prettyPrintDOM(control.getElement());
-                            }
-                            
+                            DOMUtil.debugDOM(LOGGER, control.getElement());
+
                             Element bfData = DOMUtil.getChildElement(control.getElement(), NamespaceConstants.BETTERFORM_PREFIX+":data");
                             if(bfData != null){
                                 String internalType = bfData.getAttributeNS(NamespaceConstants.BETTERFORM_NS, "type");

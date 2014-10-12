@@ -239,7 +239,7 @@ public class SchemaReader extends XFormsFunction {
                     Document elementDocument = getContextNode(namespace, elementName, xsModel);
 
                     if (LOGGER.isDebugEnabled() && elementDocument != null) {
-                        DOMUtil.prettyPrintDOM(elementDocument.getDocumentElement());
+                        DOMUtil.debugDOM(LOGGER, elementDocument.getDocumentElement());
                     }
 
                     if (elementDocument != null) {

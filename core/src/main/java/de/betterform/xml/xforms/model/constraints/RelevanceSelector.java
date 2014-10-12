@@ -73,7 +73,7 @@ public class RelevanceSelector {
         }
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("RelevantSelector result document....");
-            DOMUtil.prettyPrintDOM(relevantDocument);
+            DOMUtil.debugDOM(LOGGER, relevantDocument);
         }
 
         return relevantDocument;

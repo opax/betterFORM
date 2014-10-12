@@ -1033,6 +1033,55 @@ public class DOMUtil {
         }
     }
 
+    /**
+     * Returns the node serialized to a pretty string.
+     *
+     * <p>The string is meant to be used for diagnostic output. In case
+     * of internal errors, it may not even be parseable.</p>
+     *
+     * @param node
+     * @return the serialized node or an error message
+     */
+    public static String prettyDOMString(Node node) {
+
+        if (node == null)
+            return "[null]";
+
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(buf);
+        try {
+            prettyPrintDOM(node, buf);
+            out.close();
+            return new String(buf.toByteArray(), "UTF-8");
+        } catch (TransformerException e) {
+            return "ERROR: " + e.getMessage();
+        } catch (UnsupportedEncodingException e) {
+            return "ERROR: " + e.getMessage();
+        }
+    }
+
+    /**
+     * helper function to output DOM at "debug" level
+     *
+     * @param log the logger to be used
+     * @param node the DOM that is to be logged
+     */
+    public static void debugDOM(Log log, Node node) {
+        if (log.isDebugEnabled())
+            log.debug(prettyDOMString(node));
+    }
+
+    /**
+     * helper function to output DOM at "trace" level
+     *
+     * @param log the logger to be used
+     * @param node the DOM that is to be logged
+     */
+    public static void traceDOM(Log log, Node node) {
+        if (log.isTraceEnabled())
+            log.trace(prettyDOMString(node));
+    }
+
 
     /**
      * Serializes the specified node to the given stream. Serialization is achieved by an identity transform.
@@ -1045,6 +1094,7 @@ public class DOMUtil {
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+        transformer.setOutputProperty(OutputKeys.ENCODING, "utf-8");
         transformer.transform(new DOMSource(node), new StreamResult(stream));
     }
 

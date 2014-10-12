@@ -792,7 +792,7 @@ public class XFormsProcessorImpl implements XFormsProcessor, Externalizable{
 
                 if(LOGGER.isDebugEnabled()){
                     LOGGER.debug("....::: XForms before writing ::::....");
-                    DOMUtil.prettyPrintDOM(getXForms());
+                    DOMUtil.debugDOM(LOGGER, getXForms());
                 }
 
                 DefaultSerializer serializer = new DefaultSerializer(this);

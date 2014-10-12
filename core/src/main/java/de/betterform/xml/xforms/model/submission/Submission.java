@@ -1125,9 +1125,7 @@ public class Submission extends BindingElement implements DefaultAction {
 
             }
             else if(targetNode != null && targetNode.getNodeType() == Node.ATTRIBUTE_NODE){
-                if(LOGGER.isDebugEnabled()) {
-                    DOMUtil.prettyPrintDOM(responseInstance);
-                }
+                DOMUtil.debugDOM(LOGGER, responseInstance);
                 // targetNode.setContent(responseInstance.getTextContent());
                 String attrValue= responseInstance.getDocumentElement().getTextContent();
                 targetNode.setNodeValue(attrValue);

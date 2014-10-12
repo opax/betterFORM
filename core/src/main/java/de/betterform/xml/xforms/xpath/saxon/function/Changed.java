@@ -40,7 +40,7 @@ public class Changed extends XFormsFunction {
                 Document initial = owner.getInitialInstance();
                 if(LOGGER.isDebugEnabled()){
                     LOGGER.debug("Initial Instance: START:");
-                    DOMUtil.prettyPrintDOM(initial);
+                    DOMUtil.debugDOM(LOGGER, initial);
                     LOGGER.debug("\nInitial Instance: STOP");
                 }
 

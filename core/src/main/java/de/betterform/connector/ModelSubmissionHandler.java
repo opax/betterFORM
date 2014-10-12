@@ -92,14 +92,14 @@ public class ModelSubmissionHandler extends AbstractConnector implements Submiss
                 }
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("targetNode to replace............");
-                    DOMUtil.prettyPrintDOM(targetNode);
+                    DOMUtil.debugDOM(LOGGER, targetNode);
                 }
 
                 Document result = DOMUtil.newDocument(true,false);
                 result.appendChild(result.importNode(targetNode.cloneNode(true),true));
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("result Instance after insertion ............");
-                    DOMUtil.prettyPrintDOM(result);
+                    DOMUtil.debugDOM(LOGGER, result);
                 }
 
                 Map response=new HashMap(1);
@@ -110,7 +110,7 @@ public class ModelSubmissionHandler extends AbstractConnector implements Submiss
 
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("Instance Data to post............");
-                    DOMUtil.prettyPrintDOM(instance);
+                    DOMUtil.debugDOM(LOGGER, instance);
                 }
 
                 receiverModel = submission.getContainerObject().getModel(resourceModelId);
@@ -125,7 +125,7 @@ public class ModelSubmissionHandler extends AbstractConnector implements Submiss
                 }
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("targetNode to replace............");
-                    DOMUtil.prettyPrintDOM(targetNode);
+                    DOMUtil.debugDOM(LOGGER, targetNode);
                 }
                 //todo:review - this can be an Eleement if ref was used on submission!!!
                 if (instance instanceof Document) {
@@ -135,7 +135,7 @@ public class ModelSubmissionHandler extends AbstractConnector implements Submiss
 
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("result Instance after insertion ............");
-                    DOMUtil.prettyPrintDOM(receiverModel.getDefaultInstance().getInstanceDocument());
+                    DOMUtil.debugDOM(LOGGER, receiverModel.getDefaultInstance().getInstanceDocument());
                 }
             }else{
                 throw new XFormsException("Submission method '" + submissionMethod + "' not supported");
